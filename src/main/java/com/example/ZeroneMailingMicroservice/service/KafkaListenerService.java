@@ -13,7 +13,7 @@ public class KafkaListenerService {
 
     private final ZeroneMailSenderService zeroneMailSenderService;
 
-    @KafkaListener(topics = "zeroneMailingTopic-1")
+    @KafkaListener(id = "zeroneMailConsumer", topics = {"zeroneMailingTopic-1"}, containerFactory = "singleFactory")
     void listener(KafkaZeroneMailingDto data) {
         log.info(data.toString());
         try {

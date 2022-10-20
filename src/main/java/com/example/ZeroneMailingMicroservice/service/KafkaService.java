@@ -35,4 +35,5 @@ public class KafkaService {
             throw new RuntimeException("Writing value to JSON failed: " + dto.toString());
         }
     }
-}*/
+}
+*/
