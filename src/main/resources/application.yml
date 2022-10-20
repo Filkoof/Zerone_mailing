@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&stringtype=unspecified}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:root}
+
+  kafka:
+    bootstrap-servers: "195.161.62.32:29092"
+    consumer:
+      client-id: zeroneMailConsumer
+
+  mail:
+    host: smtp.mail.ru
+    username: zerone.mail@mail.ru
+    password: hcaPst9hn8USn45TkqLW
+    port: 465
+    protocol: smtps
+
+server:
+  port: ${PORT:8080}
+
