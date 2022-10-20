@@ -11,11 +11,11 @@ build:
     - prod
   script:
     - echo 'build'
-#    - mvn compile
-#  cache:
-#    paths:
-#      - ./target
-#      - ./.m2
+    - mvn compile
+  cache:
+    paths:
+      - ./target
+      - ./.m2
 
 test:
   stage: test
@@ -31,12 +31,12 @@ package:
     - prod
   script:
     - echo 'package'
-#    - mvn package -Dmaven.test.skip=true
-#  artifacts:
-#    paths:
-#      - target/*.jar
-#  cache:
-#    policy: pull
-#    paths:
-#      - ./target
-#      - ./.m2
+    - mvn package -Dmaven.test.skip=true
+  artifacts:
+    paths:
+      - target/*.jar
+  cache:
+    policy: pull
+    paths:
+      - ./target
+      - ./.m2
