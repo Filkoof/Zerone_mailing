@@ -30,7 +30,7 @@ public class ZeroneMailSenderService {
 
     public Boolean emailSend(String email, String title, String message) throws EmailNotSentException {
         try {
-            if (email == null) {
+            if (email != null) {
                 return send(email, title, message);
             }
         } catch (Exception e) {
