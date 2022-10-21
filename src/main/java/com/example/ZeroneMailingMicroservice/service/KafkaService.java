@@ -1,4 +1,3 @@
-/*
 package com.example.ZeroneMailingMicroservice.service;
 
 import com.example.ZeroneMailingMicroservice.dto.kafka.KafkaZeroneMailingDto;
@@ -16,24 +15,14 @@ import org.springframework.stereotype.Service;
 public class KafkaService {
 
     private final KafkaTemplate<Long, KafkaZeroneMailingDto> kafkaZeroneMailingTemplate;
-    private final ObjectMapper objectMapper;
 
     public void send(KafkaZeroneMailingDto dto) {
         kafkaZeroneMailingTemplate.send("zeroneMailingTopic-1", dto);
     }
 
-    @KafkaListener(id = "zeroneMailConsumer", topics = {"zeroneMailingTopic-1"}, containerFactory = "consumerFactory")
-    public void consume(KafkaZeroneMailingDto dto) {
-        log.info("=> consumed {}", writeValueAsString(dto));
+    public void sendRepeat(KafkaZeroneMailingDto dto) {
+        kafkaZeroneMailingTemplate.send("zeroneMailingRepeat-2", dto);
     }
 
-    private String writeValueAsString(KafkaZeroneMailingDto dto) {
-        try {
-            return objectMapper.writeValueAsString(dto);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Writing value to JSON failed: " + dto.toString());
-        }
-    }
+
 }
-*/

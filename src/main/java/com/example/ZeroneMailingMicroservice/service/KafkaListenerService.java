@@ -12,14 +12,28 @@ import org.springframework.stereotype.Service;
 public class KafkaListenerService {
 
     private final ZeroneMailSenderService zeroneMailSenderService;
+    private final KafkaService kafkaService;
 
-    @KafkaListener(id = "zeroneMailConsumer", topics = {"zeroneMailingTopic-1"}, containerFactory = "singleFactory")
+    @KafkaListener(id = "zeroneMailConsumer1", topics = {"zeroneMailingTopic-1"}, containerFactory = "singleFactory")
     void listener(KafkaZeroneMailingDto data) {
         log.info(data.toString());
         try {
             zeroneMailSenderService.emailSend(data.getEmail(), data.getTopic(), data.getBody());
         } catch (Exception e){
-            log.info("Ошибка отправки почти, нужно вернуть сообщение в очередь кафки назад.");
+            log.info("Ошибка отправки письма. {}", e.getMessage());
+            kafkaService.sendRepeat(data);
+        }
+
+    }
+
+    @KafkaListener(id = "zeroneMailConsumer2", topics = {"zeroneMailingRepeat-2"}, containerFactory = "singleFactory")
+    void listenerRepeat(KafkaZeroneMailingDto data) {
+        log.info(data.toString());
+        try {
+            zeroneMailSenderService.emailSend(data.getEmail(), data.getTopic(), data.getBody());
+        } catch (Exception e){
+            log.info("Ошибка повторной отправки почти. {}", e.getMessage());
+            kafkaService.sendRepeat(data);
         }
 
     }

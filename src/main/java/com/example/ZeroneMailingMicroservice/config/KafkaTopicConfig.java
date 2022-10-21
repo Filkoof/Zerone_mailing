@@ -13,4 +13,9 @@ class KafkaTopicConfig {
         return TopicBuilder.name("zeroneMailingTopic-1").build();
     }
 
+    @Bean
+    public NewTopic zeroneMailingRepeatTopic() {
+        return TopicBuilder.name("zeroneMailingRepeat-2").build();
+    }
+
 }
