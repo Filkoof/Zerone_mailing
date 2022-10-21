@@ -22,7 +22,7 @@ test:
   tags:
     - prod
   script:
-    - echo '----------test----------'
+    - echo 'test'
 #    - mvn test
 
 package:
@@ -43,10 +43,10 @@ package:
 
 deploy:
   stage: deploy
+  image: docker
   tags:
     - prod
   script:
-    - echo '----------deploy----------'
     - docker build -t filkoof/zerone_mailing .
     - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
     - docker push filkoof/zerone_mailing:latest
