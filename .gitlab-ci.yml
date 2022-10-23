@@ -49,4 +49,4 @@ deploy:
   script:
     - docker build -t filkoof/zerone_mailing .
     - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-    - docker push filkoof/zerone_mailing:latest1
+    - docker push filkoof/zerone_mailing:latest
