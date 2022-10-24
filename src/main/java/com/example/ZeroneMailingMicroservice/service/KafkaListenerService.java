@@ -16,11 +16,11 @@ public class KafkaListenerService {
 
     @KafkaListener(id = "zeroneMailConsumer1", topics = {"zeroneMailingTopic-1"}, containerFactory = "singleFactory")
     void listener(KafkaZeroneMailingDto data) {
-        log.info(data.toString());
+        log.info("Email with topic - {} get from Kafka server.", data.getTopic());
         try {
             zeroneMailSenderService.emailSend(data.getEmail(), data.getTopic(), data.getBody());
         } catch (Exception e){
-            log.info("Ошибка отправки письма. {}", e.getMessage());
+            log.info("Ошибка отправки письма - {}. Возвращаем в очередь для потворной отправки. Ошибка - {}", data.getTopic(), e.getMessage());
             kafkaService.sendRepeat(data);
         }
 

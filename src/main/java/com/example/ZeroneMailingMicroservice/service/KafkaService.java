@@ -16,10 +16,6 @@ public class KafkaService {
 
     private final KafkaTemplate<Long, KafkaZeroneMailingDto> kafkaZeroneMailingTemplate;
 
-    public void send(KafkaZeroneMailingDto dto) {
-        kafkaZeroneMailingTemplate.send("zeroneMailingTopic-1", dto);
-    }
-
     public void sendRepeat(KafkaZeroneMailingDto dto) {
         kafkaZeroneMailingTemplate.send("zeroneMailingRepeat-2", dto);
     }
